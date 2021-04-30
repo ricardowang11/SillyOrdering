@@ -25,5 +25,4 @@ public class User {
     private List<Integer> historyOrdersId;
     private List<Integer> curOrdersId;
     private List<Item> items;
-
 }
