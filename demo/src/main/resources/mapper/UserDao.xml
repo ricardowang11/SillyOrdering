@@ -2,4 +2,103 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.UserDao">
 
+    <insert id="addNormalUser" useGeneratedKeys="true" keyProperty="id" keyColumn="user_id">
+        insert into normalUsers
+        (user_name,
+         user_phone,
+         user_password,)
+        values (#{name},
+                #{phone},
+                #{password});
+    </insert>
+    <insert id="addAddr">
+        insert into #{userId}_Address
+        (address_name,
+         address_phone,
+         address_addr,)
+        values (
+            address.name,
+            address.phone,
+            address.address
+            );
+    </insert>
+    <insert id="addBusinessUser" useGeneratedKeys="true" keyProperty="id" keyColumn="user_id">
+        insert into businessUsers
+        (user_name,
+         user_phone,
+         user_password,)
+        values (#{name},
+                #{phone},
+                #{password});
+    </insert>
+
+
+    <update id="updateNormalUser">
+        update nomalUsers set
+                              user_name=#{name},
+                              user_phone=#{phone},
+                              user_password=#{password}
+                              where user_id=#{id}
+    </update>
+    <update id="createAddressTable">
+        CREATE TABLE #{userId}_Address
+        (
+            address_name 	CHAR(50)	NOT NULL,
+            address_phone	CHAR(50)	,
+            address_addr	VARCHAR(1024)	NOT NULL,
+            )ENGINE=INNODB
+    </update>
+    <update id="createHistoryOrders">
+        CREATE TABLE #{userId}_HistoryOrders
+        (
+            hisOrder_id 	INT	NOT NULL,
+        )ENGINE=INNODB;
+    </update>
+    <update id="createUserCurOrders">
+        CREATE TABLE #{userId}_userCurOrders
+        (
+            curOrder_id 	INT	NOT NULL,
+        )ENGINE=INNODB;
+    </update>
+    <update id="updateBusinessUser">
+        update businessUsers set
+                              user_name=#{name},
+                              user_phone=#{phone},
+                              user_password=#{password}
+        where user_id=#{id}
+    </update>
+    <update id="createShopCurOrders">
+        CREATE TABLE #{userId}_shopCurOrders
+        (
+            curOrder_id 	INT	NOT NULL,
+        )ENGINE=INNODB;
+    </update>
+
+
+    <delete id="deleteAddressTable">
+        drop table #{userId}__Address
+    </delete>
+    <delete id="deleteHistoryOrders">
+        drop table #{userId}_HistoryOrders
+    </delete>
+    <delete id="deleteUserCurOrders">
+        drop table #{userId}_userCurOrders
+    </delete>
+    <delete id="deleteShopCurOrders">
+        drop table #{userId}_shopCurOrders
+    </delete>
+
+
+    <select id="getNormalUserWithName" resultType="com.example.demo.bean.User">
+        select * from nomalUsers where user_name=#{username} limit 1
+    </select>
+    <select id="getNormalUserWithId" resultType="com.example.demo.bean.User">
+        select * from nomalUsers where user_id=#{id} limit 1
+    </select>
+    <select id="getBusinessUserWithName" resultType="com.example.demo.bean.User">
+        select * from businessUsers where user_name=#{username} limit 1
+    </select>
+    <select id="getBusinessUserWithId" resultType="com.example.demo.bean.User">
+        select * from businessUsers where user_id=#{id} limit 1
+    </select>
 </mapper>

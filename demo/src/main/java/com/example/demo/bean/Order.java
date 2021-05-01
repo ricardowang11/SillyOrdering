@@ -22,7 +22,7 @@ public class Order {
     private int shopId;
     private OrderStatus status;
     private float totalPrice;
-    private HashMap<Integer,Item> idAndCount;
+    private HashMap<Integer,Integer> idAndCount;
     private String date;
     private String address;
 }
