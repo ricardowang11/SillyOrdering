@@ -20,7 +20,7 @@ public class Order {
     private int id;
     private int userid;
     private int shopId;
-    private OrderStatus status;
+    private int status;
     private float totalPrice;
     private HashMap<Integer,Integer> idAndCount;
     private String date;

@@ -23,7 +23,7 @@ public class Shop {
     private String phone;
     private String pic;
     private List<Item> items;
-    private ShopStatus status;
+    private int status;
     private List<Order> curOrders;
     private float curBalance;
     private String creditCard;
