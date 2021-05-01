@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.ShopDao">
+    <insert id="addShop" parameterType="com.example.demo.bean.Shop">
+        insert into shops(shop_id,
+                            shop_ownerId,
+                            shop_name,
+                            shop_phone,
+                            shop_pic,
+                            shop_status)
+        values(null,
+                  #{ownerId},
+                  #{name},
+                  #{phone},
+                  #{pic},
+                  #{items},
+                  #{status});
+    </insert>
 
+    <update id="createItemsTable">
+        CREATE TABLE #{shopId}_items
+                (item_id		    INT		    NOT NULL AUTO_INCREMENT,
+                item_shopId	    INT				,
+                item_name 	    CHAR(50)	NOT NULL,
+                item_pic	    CHAR(255)	NOT NULL,
+                item_price  	FLOAT   	NOT NULL,
+                PRIMARY KEY(item_id)
+                )ENGINE=INNODB;
+    </update>
+
+    <update id="updateBusinessUsers">
+        update businessUsers set user_shopId=#{shopId} where user_id=#{userId};
+    </update>
+
+    <select id="getBalance" resultType="com.example.demo.bean.Shop">
+        select * from shops where shop_id=#{shopId};
+    </select>
+
+    <select id="getShop" resultType="com.example.demo.bean.Shop">
+        select * from  shops where shop_id=#{shopId};
+    </select>
+
+    <select id="getShops" resultType="com.example.demo.bean.Shop">
+        select * from  shops limit #{begin};
+    </select>
+
+    <insert id="addItem" parameterType="com.example.demo.bean.Item">
+        insert into #{shopId}_items(item_id,
+                                    item_shopId,
+                                    item_name,
+                                    item_pic,
+                                    item_price)
+            values(#{id},
+                  #{shopId},
+                  #{name},
+                  #{pic},
+                  #{price});
+    </insert>
+
+    <update id="updateItem">
+        update #{shopId}_items set item_name=#{newItem.name},
+                                    item_pic=#{newItem.pic},
+                                    item_price=#{newItem.price}
+        where item_id=#{itemId};
+    </update>
+
+    <delete id="deleteItem">
+        delete from #{shopId}_items where item_id=#{itemId} ;
+    </delete>
 </mapper>

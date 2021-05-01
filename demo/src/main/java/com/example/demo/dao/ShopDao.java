@@ -2,7 +2,9 @@ package com.example.demo.dao;
 
 import com.example.demo.bean.Item;
 import com.example.demo.bean.Shop;
+import com.example.demo.bean.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -19,9 +21,9 @@ public interface ShopDao {
 
     void createItemsTable(int shopId);
 
-    int addItem(Item item);
+    int updateBusinessUsers(@Param("shopId") int shopId,@Param("userId") int userId);
 
-    int getBalance(int shopId);
+    Shop getBalance(int shopId);
 
     Shop getShop(int id);
 
@@ -29,10 +31,10 @@ public interface ShopDao {
 
     List<Shop> getShops(String name);
 
-    int addItem(int shopId, Item item);
+    int addItem(@Param("shopId") int shopId,@Param("item") Item item);
 
-    int updateItem(int shopId, int itemId, Item newItem);
+    int updateItem(@Param("shopId") int shopId,@Param("itemId") int itemId,@Param("newItem") Item newItem);
 
-    int deleteItem(int shopId, int itemId);
+    int deleteItem(@Param("shopId") int shopId,@Param("itemId") int itemId);
 
 }

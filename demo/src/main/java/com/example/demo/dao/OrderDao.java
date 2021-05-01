@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.bean.Order;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @Author: wangqin
@@ -9,7 +10,7 @@ import com.example.demo.bean.Order;
  * @version: 1.0
  */
 public interface OrderDao {
-    int updateOrder(int orderId, Order newOrder);
+    int updateOrder(@Param("orderId") int orderId,@Param("newOrder") Order newOrder);
 
     int addOrder(Order order);
 
