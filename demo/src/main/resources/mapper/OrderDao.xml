@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.OrderDao">
     <update id="updateOrder">
-        update orders set username=?,password=? where id=?;
+--         update orders set username=?,password=? where id=?;
     </update>
     <insert id="addOrder" parameterType="com.example.demo.bean.Order">
         insert into orders(         order_id,
@@ -14,13 +14,13 @@
                                     order_date,
                                     order_address
                                     )
-            values(#{id},
-                  #{userId},
-                  #{shopId},
-                  #{status},
-                  #{totalPrice},
+            values(#{order.id},
+                  #{order.userId},
+                  #{order.shopId},
+                  #{order.status},
+                  #{order.totalPrice},
                   #{idAndCount},
-                  #{date},
-                  #{address});
+                  #{order.date},
+                  #{order.address});
     </insert>
 </mapper>

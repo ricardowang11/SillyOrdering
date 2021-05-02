@@ -12,6 +12,6 @@ import org.apache.ibatis.annotations.Param;
 public interface OrderDao {
     int updateOrder(@Param("orderId") int orderId,@Param("newOrder") Order newOrder);
 
-    int addOrder(Order order);
+    int addOrder(@Param("idAndCount") String idAndCount,@Param("order") Order order);
 
 }
