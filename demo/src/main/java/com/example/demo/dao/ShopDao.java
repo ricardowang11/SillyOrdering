@@ -21,15 +21,14 @@ public interface ShopDao {
 
     void createItemsTable(int shopId);
 
-    int updateBusinessUsers(@Param("shopId") int shopId,@Param("userId") int userId);
+    int getBalance(int shopId);
 
-    Shop getBalance(int shopId);
+    int updateBalance(@Param("shopId") int shopId, @Param("newBalance") int newBalance);
+    Shop getShop(int shopId);
 
-    Shop getShop(int id);
+    List<Shop> getShops(int page);
 
-    List<Shop> getShops(int begin);
-
-    List<Shop> getShops(String name);
+//    List<Shop> getShops(String name);
 
     int addItem(@Param("shopId") int shopId,@Param("item") Item item);
 

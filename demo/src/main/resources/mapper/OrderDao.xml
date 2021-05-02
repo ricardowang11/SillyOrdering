@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.OrderDao">
     <update id="updateOrder">
---         update orders set username=?,password=? where id=?;
+        update orders set order_status=#{newOrder.status} where id=#{newOrder.id}
     </update>
-    <insert id="addOrder" parameterType="com.example.demo.bean.Order">
+
+
+    <insert id="addOrder">
         insert into orders(         order_id,
                                     order_userId,
                                     order_shopId,
@@ -23,4 +25,35 @@
                   #{order.date},
                   #{order.address});
     </insert>
+
+
+    <insert id="addCurOrderToShop">
+        insert into #{shopId}_shopCurOrders(
+            curOrder_id
+        )values(
+        orderId
+            )
+    </insert>
+    <insert id="addCurOrderToUser">
+        insert into #{userId}_userCurOrders(
+            curOrder_id
+        )values(
+            orderId
+            )
+    </insert>
+    <delete id="deleteCurOrderFromUser">
+        delete #{userId}_userCurOrders where curOrder_id=#{orderId}
+    </delete>
+
+
+    <insert id="addHisOrderToUser">
+        insert into #{userId}_HistoryOrders(
+            curOrder_id
+        )values(
+            orderId
+            )
+    </insert>
+    <delete id="deleteCurOrderFromBusiness">
+        delete #{shopId}_businessCurOrders where curOrder_id=#{orderId}
+    </delete>
 </mapper>
