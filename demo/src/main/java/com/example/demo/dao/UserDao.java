@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserDao {
     int addNormalUser(User user);
-    User getNormalUserWithName(String username);
+//    User getNormalUserWithName(String username);
     User getNormalUserWithId(int id);
     int updateNormalUser(User user);
     int addAddr(@Param("address") Address address,@Param("userId") int userId);
@@ -24,7 +24,7 @@ public interface UserDao {
     void deleteUserCurOrders(int userId);
 
     int addBusinessUser(User user);
-    User getBusinessUserWithName(String username);
+//    User getBusinessUserWithName(String username);
     User getBusinessUserWithId(int id);
     int updateBusinessUser(User user);
     void createShopCurOrders(int userId);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.ShopDao">
-    <insert id="addShop" parameterType="com.example.demo.bean.Shop">
+    <insert id="addShop">
         insert into shops(shop_id,
                             shop_ownerId,
                             shop_name,
@@ -13,7 +13,6 @@
                   #{name},
                   #{phone},
                   #{pic},
-                  #{items},
                   #{status});
     </insert>
 
@@ -28,20 +27,36 @@
                 )ENGINE=INNODB;
     </update>
 
-    <update id="updateBusinessUsers">
-        update businessUsers set user_shopId=#{shopId} where user_id=#{userId};
+
+    <select id="getBalance" resultType="int">
+        select shop_curBalance from shops where shop_id=#{shopId};
+    </select>
+    <update id="updateBalance">
+        update shops set shop_curBalance=#{newBalance} where shop_id=#{shopId}
     </update>
-
-    <select id="getBalance" resultType="com.example.demo.bean.Shop">
-        select * from shops where shop_id=#{shopId};
+    <resultMap id="shopMap" type="com.example.demo.bean.Shop">
+        <id property="id" column="shop_id"/>
+        <result property="ownerId" column="shop_ownerId"/>
+        <result property="name" column="shop_name"/>
+        <result property="phone" column="shop_phone"/>
+        <result property="pic" column="shop_pic"/>
+        <result property="curBalance" column="shop_curBalance"/>
+        <result property="creditCard" column="shop_creditCard"/>
+        <result property="status" column="shop_status"/>
+        <collection property="items" ofType="com.example.demo.bean.Item" javaType="list">
+            <id property="id" column="item_id"/>
+            <result property="shopId" column="item_shopId"/>
+            <result property="name" column="item_name"/>
+            <result property="pic" column="item_pic"/>
+            <result property="price" column="item_price"/>
+        </collection>
+    </resultMap>
+    <select id="getShop" resultMap="shopMap">
+        select * from  shops,#{shopId}_items where shop_id=#{shopId};
     </select>
 
-    <select id="getShop" resultType="com.example.demo.bean.Shop">
-        select * from  shops where shop_id=#{shopId};
-    </select>
-
-    <select id="getShops" resultType="com.example.demo.bean.Shop">
-        select * from  shops limit #{begin};
+    <select id="getShops" resultMap="shopMap">
+        select * from  shops,#{shopId}_items limit #{page*8},8;
     </select>
 
     <insert id="addItem" parameterType="com.example.demo.bean.Item">
@@ -56,14 +71,12 @@
                   #{pic},
                   #{price});
     </insert>
-
     <update id="updateItem">
         update #{shopId}_items set item_name=#{newItem.name},
                                     item_pic=#{newItem.pic},
                                     item_price=#{newItem.price}
         where item_id=#{itemId};
     </update>
-
     <delete id="deleteItem">
         delete from #{shopId}_items where item_id=#{itemId} ;
     </delete>
