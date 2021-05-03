@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.InsertDao">
+    <insert id="insertShops">
+        insert into shops(          shop_id,
+                                    shop_ownerId,
+                                    shop_name,
+                                    shop_phone,
+                                    shop_pic,
+                                    shop_status,
+                                    shop_curBalance,
+                                    shop_creditCard)
+            values(null,
+                  #{ownerId},
+                  #{name},
+                  #{phone},
+                  #{pic},
+                  #{status},
+                  #{curBalance},
+                  #{creditCard});
+    </insert>
+
+    <insert id="insertItems">
+        insert into #{shopId}_items(item_id,
+                                    item_shopId,
+                                    item_name,
+                                    item_pic,
+                                    item_price)
+            values(null,
+                  #{item.shopId},
+                  #{item.name},
+                  #{item.pic},
+                  #{item.price});
+    </insert>
+</mapper>

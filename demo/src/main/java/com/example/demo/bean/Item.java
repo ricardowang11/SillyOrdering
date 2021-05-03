@@ -19,4 +19,11 @@ public class Item {
     private String name;
     private String pic;
     private float price;
+
+    public Item(int shopId, String name, String pic, float price) {
+        this.shopId = shopId;
+        this.name = name;
+        this.pic = pic;
+        this.price = price;
+    }
 }
