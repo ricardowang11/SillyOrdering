@@ -52,6 +52,9 @@
         </collection>
     </resultMap>
     <select id="getShop" resultMap="shopMap">
+--       select
+--       * from shops s left join #{shopId}_items i on s.shop_id = i.item_shopId
+--       where s.shop_id = #{shopId}
         select * from  shops,#{shopId}_items where shop_id=#{shopId};
     </select>
 

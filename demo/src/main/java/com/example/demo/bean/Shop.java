@@ -1,6 +1,5 @@
 package com.example.demo.bean;
 
-import com.example.demo.utils.ShopStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,4 +26,14 @@ public class Shop {
     private List<Order> curOrders;
     private float curBalance;
     private String creditCard;
+
+    public Shop(int ownerId, String name, String phone, String pic, int status, float curBalance, String creditCard) {
+        this.ownerId = ownerId;
+        this.name = name;
+        this.phone = phone;
+        this.pic = pic;
+        this.status = status;
+        this.curBalance = curBalance;
+        this.creditCard = creditCard;
+    }
 }
