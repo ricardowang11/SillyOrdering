@@ -56,4 +56,31 @@
     <delete id="deleteCurOrderFromBusiness">
         delete #{shopId}_businessCurOrders where curOrder_id=#{orderId}
     </delete>
+
+    <resultMap id="OrderMap" type="com.example.demo.bean.OrderWrapper">
+            <id property="id" column="order_id"></id>
+            <result property="shopId" column="order_shopId"></result>
+            <result property="userid" column="order_userId"></result>
+            <result property="status" column="order_status"></result>
+            <result property="totalPrice" column="order_totalPrice"></result>
+            <result property="date" column="order_date"></result>
+            <result property="address" column="order_address"></result>
+            <result property="idAndCount" column="order_idAndCount"></result>
+    </resultMap>
+    <select id="getUserCurOrders" resultMap="OrderMap">
+        select *
+         from orders o left join #{userId}_userCurOrders uco on o.order_id = uco.curOrder_id
+         where o.order_userId =#{userId};
+    </select>
+
+    <select id="getShopCurOrders" resultMap="OrderMap">
+          select *
+         from orders o left join #{shopId}_shopCurOrders uco on o.order_id = uco.curOrder_id
+         where o.order_userId =#{shopId};
+    </select>
+    <select id="getUserHisOrders" resultMap="OrderMap">
+        select *
+         from orders o left join #{userId}_HistoryOrders ho on o.order_id = ho.hisOrder_id
+         where o.order_userId =#{userId};
+    </select>
 </mapper>

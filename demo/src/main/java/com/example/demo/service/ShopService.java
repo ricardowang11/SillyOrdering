@@ -16,18 +16,19 @@ import java.util.List;
  */
 @Service
 public class ShopService {
+    //商家点的    退款
    public int refund(int orderId) {
        return 0;
    }
-
+    //确认送达
     public int confirm(int orderId) {
        return 0;
     }
-
+    //下单
     public int createOrder(HttpSession session) {
        return 0;
     }
-
+    //添加到购物车
     public int addToCart(HttpSession session) {
        return 0;
     }
@@ -35,7 +36,7 @@ public class ShopService {
     public float getBalance(HttpSession session) {
        return 0;
     }
-
+    //获取商人信息
     public User getBusiness(int id) {
        return null;
     }
@@ -43,7 +44,7 @@ public class ShopService {
     public Shop getShop(int id) {
        return null;
     }
-
+//    待做
     public List<Shop> getShops(String name) {
        return null;
     }

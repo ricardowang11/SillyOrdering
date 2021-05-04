@@ -17,8 +17,8 @@ public interface UserDao {
     int updateNormalUser(User user);
     int addAddr(@Param("address") Address address,@Param("userId") int userId);
     void createAddressTable(int userId);
-    void createHistoryOrders(int userId);
-    void createUserCurOrders(int userId);
+    void createHistoryOrders(@Param("userId") int userId);
+    void createUserCurOrders(@Param("userId")int userId);
     void deleteAddressTable(int userId);
     void deleteHistoryOrders(int userId);
     void deleteUserCurOrders(int userId);
