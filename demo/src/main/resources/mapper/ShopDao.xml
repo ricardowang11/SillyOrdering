@@ -34,32 +34,48 @@
     <update id="updateBalance">
         update shops set shop_curBalance=#{newBalance} where shop_id=#{shopId}
     </update>
+
     <resultMap id="shopMap" type="com.example.demo.bean.Shop">
-        <id property="id" column="shop_id"/>
-        <result property="ownerId" column="shop_ownerId"/>
-        <result property="name" column="shop_name"/>
-        <result property="phone" column="shop_phone"/>
-        <result property="pic" column="shop_pic"/>
-        <result property="curBalance" column="shop_curBalance"/>
-        <result property="creditCard" column="shop_creditCard"/>
-        <result property="status" column="shop_status"/>
+        <id property="id" column="sid"/>
+        <result property="ownerId" column="soid"/>
+        <result property="name" column="sname"/>
+        <result property="phone" column="sphone"/>
+        <result property="pic" column="spic"/>
+        <result property="curBalance" column="scurB"/>
+        <result property="creditCard" column="screC"/>
+        <result property="status" column="sstatus"/>
         <collection property="items" ofType="com.example.demo.bean.Item" javaType="list">
-            <id property="id" column="item_id"/>
-            <result property="shopId" column="item_shopId"/>
-            <result property="name" column="item_name"/>
-            <result property="pic" column="item_pic"/>
-            <result property="price" column="item_price"/>
+            <id property="id" column="iid"/>
+            <result property="shopId" column="ishopId"/>
+            <result property="name" column="iname"/>
+            <result property="pic" column="ipic"/>
+            <result property="price" column="iprice"/>
         </collection>
     </resultMap>
     <select id="getShop" resultMap="shopMap">
---       select
---       * from shops s left join #{shopId}_items i on s.shop_id = i.item_shopId
---       where s.shop_id = #{shopId}
-        select * from  shops,#{shopId}_items where shop_id=#{shopId};
+      select s.shop_id as sid,
+            s.shop_ownerId as soid,
+            s.shop_name as sname,
+            s.shop_phone as sphone,
+            s.shop_pic as spic,
+            s.shop_status as sstatus,
+            s.shop_curBalance as scurB,
+            s.shop_creditCard as screC,
+              i.item_id as iid,
+              i.item_shopId as isid,
+              i.item_name as iname,
+              i.item_pic as ipic,
+              i.item_price as iprice
+       from shops s left join #{shopId}_items i on s.shop_id = i.item_shopId
+      where s.shop_id = #{shopId}
     </select>
 
-    <select id="getShops" resultMap="shopMap">
-        select * from  shops,#{shopId}_items limit #{page*8},8;
+    <!--分布查询-->
+    <resultMap id="shopsMap" type="com.example.demo.bean.Shop">
+    </resultMap>
+    <select id="getShops" resultMap="shopsMap">
+        select
+        from  shops,#{shopId}_items limit #{page*8},8;
     </select>
 
     <insert id="addItem" parameterType="com.example.demo.bean.Item">

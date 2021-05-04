@@ -35,7 +35,9 @@ class DemoApplicationTests {
         System.out.println(dataSource.getConnection());
         System.out.println(shopDao);
         Shop shop = shopDao.getShop(1);
-        System.out.println(shop);
+        for (Item item : shop.getItems()) {
+            System.out.println(item);
+        }
     }
 
     @Test
@@ -69,7 +71,7 @@ class DemoApplicationTests {
             int score = random.nextInt(10) + 1;
             float price = random.nextFloat() + 1;
             int shopId = random.nextInt(4) + 1;
-            insertDao.insertItems(7,new Item(shopId,name,"/img/立新食品",price));
+            insertDao.insertItems(1,new Item(1,name,"/img/立新食品",price));
         }
     }
 }
