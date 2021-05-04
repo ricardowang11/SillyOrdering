@@ -27,5 +27,9 @@ public class UserService {
     public int addAddr(Address newAddr) {
         return 0;
     }
+    //确认收货
+    public int confirm(int orderId) {
+        return 0;
+    }
 
 }

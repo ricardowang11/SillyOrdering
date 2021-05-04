@@ -2,11 +2,8 @@ package com.example.demo.dao;
 
 import com.example.demo.bean.Item;
 import com.example.demo.bean.Shop;
-import com.example.demo.bean.User;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -27,6 +24,8 @@ public interface ShopDao {
     Shop getShop(int shopId);
 
     List<Shop> getShops(int page);
+
+    List<Item> getShopsStepZero(@Param("shopId")int shopId);
 
 //    List<Shop> getShops(String name);
 

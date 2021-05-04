@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.bean.Order;
+import com.example.demo.bean.OrderWrapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public interface OrderDao {
     int deleteCurOrderFromUser(@Param("orderId") int orderId,@Param("userId")int userId);
     int deleteCurOrderFromBusiness(@Param("orderId") int orderId,@Param("shopId")int shopId);
 
-    List<Order> getUserCurOrders(@Param("userId")int userId);
-    List<Order> getShopCurOrders(@Param("shopId")int shopId);
-    List<Order> getUserHisOrders(@Param("userId")int userId);
+    List<OrderWrapper> getUserCurOrders(@Param("userId")int userId);
+    List<OrderWrapper> getShopCurOrders(@Param("shopId")int shopId);
+    List<OrderWrapper> getUserHisOrders(@Param("userId")int userId);
 }
